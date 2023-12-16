@@ -204,9 +204,7 @@ namespace CSharpIntro {
             //Console.WriteLine(c.MyInt.ToString());
 
 
-
-
-            //use collection
+            /* use collection
 
             Console.WriteLine("create an array type collection of animal " + "objects and use it: ");
             Animal[] animalArray = new Animal[2];
@@ -264,10 +262,103 @@ namespace CSharpIntro {
             Console.ReadKey();
 
             //enumerator and enumerable
-            Primes primesFrom2To1000 = new Primes(2, 1000);
+            /*Primes primesFrom2To1000 = new Primes(2, 1000);
             foreach (long i in primesFrom2To1000)
                 Console.Write("{0} ", i);
+            Console.ReadKey();*/
+
+            /* shallow copy
+            Cloner mySource = new Cloner(5);
+            Cloner myTarget = (Cloner)mySource.Clone();
+            Console.WriteLine("myTarget.MyContent.Val = {0}", myTarget.MyContent.Val);
+            mySource.MyContent.Val = 2;
+            Console.WriteLine("myTarget.MyContent.Val = {0}", myTarget.MyContent.Val);
+
+            //is modifier
+            Checker check = new Checker();
+            ClassA try1 = new ClassA();
+            ClassB try2 = new ClassB();
+            ClassC try3 = new ClassC();
+            ClassD try4 = new ClassD();
+            MyStruct try5 = new MyStruct();
+            object try6 = try5;
+            Console.WriteLine("Analyzing ClassA type variable:");
+            check.Check(try1);
+            Console.WriteLine("Analyzing ClassB type variable:");
+            check.Check(try2);
+            Console.WriteLine("Analyzing ClassC type variable:");
+            check.Check(try3);
+            Console.WriteLine("Analyzing ClassD type variable:");
+            check.Check(try4);
+            Console.WriteLine("Analyzing mystruct type variable:");
+            check.Check(try5);
+            Console.WriteLine("Analyzing boxed mystruct type variable:");
+            check.Check(try6);
+
+
+            //IComparable, IComparer
+            ArrayList list = new ArrayList();
+            list.Add(new Person("Jim", 30));
+            list.Add(new Person("Bob", 25));
+            list.Add(new Person("Bert", 27));
+            list.Add(new Person("Ernie", 22));
+
+            Console.WriteLine("Unsorted people: ");
+            foreach(Person p in list)
+            {
+                Console.WriteLine("{0} {1}", p.Name, p.Age);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("People sorted with default comparer (by age): ");
+            list.Sort();
+            foreach (Person p in list)
+            {
+                Console.WriteLine("{0} {1}", p.Name, p.Age);
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("People sorted with nondefault comparer (by name): ");
+            list.Sort(PersonComparerName.Default);
+            foreach (Person p in list)
+            {
+                Console.WriteLine("{0} {1}", p.Name, p.Age);
+            }
             Console.ReadKey();
+
+            */
+
+
+            //testcases in Exercise after chapter
+            People myPeople = new People();
+            myPeople["Alice"] = new Person { Name = "Alice", Age = 30 };
+            myPeople["Bob"] = new Person { Name = "Bob", Age = 25 };
+            myPeople["Charlie"] = new Person { Name = "Charlie", Age = 35 };
+            myPeople["Daisy"] = new Person { Name = "Daisy", Age = 35 }; // 同年龄的另一个人
+
+            // 测试迭代器
+            Console.WriteLine("Ages:");
+            foreach (int age in myPeople)
+            {
+                Console.WriteLine(age);
+            }
+
+            // 测试 GetOldest 方法
+            var oldest = myPeople.GetOldest();
+            Console.WriteLine("\nOldest:");
+            foreach (var person in oldest)
+            {
+                Console.WriteLine($"{person.Name} - {person.Age}");
+            }
+
+            // 测试克隆功能
+            People clonedPeople = (People)myPeople.Clone();
+            Console.WriteLine("\nCloned People:");
+            foreach (var age in clonedPeople)
+            {
+                Console.WriteLine(age);
+            }
+
         }
     }
 }
